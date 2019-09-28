@@ -10,7 +10,7 @@ def lshf(c): # one-character keyboard left shift.
 
 def krev(c): # One-character keyboard reversion.
     lut = '~!@#$%^&*()_+\tQWERTYUIOP{}|ASDFGHJKL:"\nZXCVBNM<>? `1234567890-=qwertyuiop[]\\asdfghjkl;\'zxcvbnm,./'
-    res = '\t+_)(*&^%$#@!~|}{POIUYTREWQ\n":LKJHGFDSA ?><MNBVCXZ=-0987654321`\\][poiuytrewq\';lkjhgfdsa/.,mnbvcxz'
+    res = '+_)(*&^%$#@!~|}{POIUYTREWQ\t\n":LKJHGFDSA ?><MNBVCXZ=-0987654321`\\][poiuytrewq\';lkjhgfdsa/.,mnbvcxz'
     # TODO: Define a LUT that converts characters according
     # to my QWERTY keyboard of my laptop.
     return res[lut.index(c)]
@@ -67,7 +67,7 @@ while i < len(code): # The iteration starts now.
     # Usage: this reverses the whole queue's data.
     # Example: asdf~ will result in fdsa.
 
-    elif s == '@' or s == '_': # Easy, just keyboard reversing.
+    elif s == '@' or s == ')': # Easy, just keyboard reversing.
         rs=not rs
     
     elif s == 'Z': # The least frequent English letter, left shift keyboard & push!
@@ -75,6 +75,12 @@ while i < len(code): # The iteration starts now.
         queue.insert(0,code[i+1])
         i+=1
     
+    elif s == 'z': # Left shifting twice is always useful!
+        code[i+1]=lshf(code[i+1])
+        code[i+1]=lshf(code[i+1])
+        queue.insert(0,code[i+1])
+        i+=1
+
     else: # Boring push-onto-queue.
         queue.insert(0,s)
 
