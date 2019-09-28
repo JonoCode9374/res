@@ -4,8 +4,8 @@
 # Description: defines a function
 # that reverses the keys on the keyboard horizontally.
 def lshf(c): # one-character keyboard left shift.
-    lut = '`1234567890-=\tqwertyuiop[]\\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?'
-    res = '=`1234567890-\\\tqwertyuiop[]\'asdfghjkl;/zxcvbnm,.+~!@#$%^&*()_|QWERTYUIOP{}"ASDFGHJKL:?ZXCVBNM<>'
+    lut = '`1234567890-=\tqwertyuiop[]\\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?·'
+    res = '=`1234567890-\\\tqwertyuiop[]\'asdfghjkl;/zxcvbnm,.+~!@#$%^&*()_|QWERTYUIOP{}"ASDFGHJKL:?ZXCVBNM<>·'
     return res[lut.index(c)]
 
 def krev(c): # One-character keyboard reversion.
@@ -67,7 +67,9 @@ while i < len(code): # The iteration starts now.
     # Usage: this reverses the whole queue's data.
     # Example: asdf~ will result in fdsa.
 
-    elif s == '@' or s == ')': # Easy, just keyboard reversing.
+    elif s == '@' or s == ')' or s == '\t' or s == '|':
+        # Easy, just keyboard reversing. (4 aliases for this instruction.)
+        # Of course a tab is also key reversing (if you are desparately wanting space)
         rs=not rs
     
     elif s == 'Z': # The least frequent English letter, left shift keyboard & push!
