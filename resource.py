@@ -3,6 +3,11 @@
 
 # Description: defines a function
 # that reverses the keys on the keyboard horizontally.
+def lshf(c): # one-character keyboard left shift.
+    lut = '`1234567890-=\tqwertyuiop[]\\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?'
+    res = '=`1234567890-\\\tqwertyuiop[]\'asdfghjkl;/zxcvbnm,.+~!@#$%^&*()_|QWERTYUIOP{}"ASDFGHJKL:?ZXCVBNM<>'
+    return res[lut.index(c)]
+
 def krev(c): # One-character keyboard reversion.
     lut = '~!@#$%^&*()_+\tQWERTYUIOP{}|ASDFGHJKL:"\nZXCVBNM<>? `1234567890-=qwertyuiop[]\\asdfghjkl;\'zxcvbnm,./'
     res = '\t+_)(*&^%$#@!~|}{POIUYTREWQ\n":LKJHGFDSA ?><MNBVCXZ=-0987654321`\\][poiuytrewq\';lkjhgfdsa/.,mnbvcxz'
@@ -14,9 +19,13 @@ import sys # Used for argument parsing
 
 try:
     file = open(sys.argv[1]) # Read a file
-    code = file.read() # And take contents.
+    cod = file.read() # And take contents.
 except:
-    code = input()
+    cod = input()
+
+code=[] # simple instruction splitter
+for i in cod:
+    code.append(i)
 
 i = 0 # The program cursor
 queue = [] # and the queue
@@ -61,9 +70,11 @@ while i < len(code): # The iteration starts now.
     elif s == '@' or s == '_': # Easy, just keyboard reversing.
         rs=not rs
     
-    elif s == 'Z': # The least frequent English letter, push an underscore.
-        queue.insert(0,'_')
-
+    elif s == 'Z': # The least frequent English letter, left shift keyboard & push!
+        code[i+1]=lshf(code[i+1])
+        queue.insert(0,code[i+1])
+        i+=1
+    
     else: # Boring push-onto-queue.
         queue.insert(0,s)
 
