@@ -6,18 +6,7 @@ i = 0 # The program cursor
 queue = [] # and the queue
 
 while i < len(code): # The iteration starts now.
-
-    if code[i]=='#': # One-line comment.
-        try:
-            while code[i]!='\n':
-                i+=1
-        except:
-            continue
-
-    # Usage: #This is a one-line comment
-    # These comments only last for 1 line.
-
-    elif code[i]=='\\': # Escaping instruction.
+    if code[i]=='\\': # Escaping instruction.
         i+=1
         try:
             queue.insert(0,code[i])
