@@ -1,7 +1,11 @@
 import sys # Used for argument parsing
 
-file = open(sys.argv[1]) # Read a file
-code = file.read() # And take contents.
+try:
+    file = open(sys.argv[1]) # Read a file
+    code = file.read() # And take contents.
+except:
+    code = input()
+
 i = 0 # The program cursor
 queue = [] # and the queue
 
@@ -20,6 +24,21 @@ while i < len(code): # The iteration starts now.
     # If used on end of file, this pushes
     # a newline onto the queue.
 
+    elif code[i] == '<': # Rollback duplicate instruction.
+        queue.insert(0,queue[-1])
+    
+    # Usage: This copies the frontmost 
+    # item of the queue to the back of 
+    # the queue.
+    # Example: ab< does bab onto 
+    # the queue.
+    
+    elif code[i] == '~': # Reverse the whole queue.
+        queue=queue[::-1]
+    
+    # Usage: this reverses the whole queue's data.
+    # Example: asdf~ will result in fdsa.
+
     else: # Boring push-onto-queue.
         queue.insert(0,code[i])
 
@@ -33,6 +52,8 @@ while i < len(code): # The iteration starts now.
 # Just used for debugging, will be
 # indicated by a flag later:
 print(queue)
+
+queue=queue[::-1]
 
 # Implicit output
 for _ in range(len(queue)):
