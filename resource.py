@@ -58,9 +58,12 @@ while i < len(code): # The iteration starts now.
     # Usage: this reverses the whole queue's data.
     # Example: asdf~ will result in fdsa.
 
-    elif s == '@': # Easy, just keyboard reversing.
+    elif s == '@' or s == '_': # Easy, just keyboard reversing.
         rs=not rs
     
+    elif s == 'Z': # The least frequent English letter, push an underscore.
+        queue.insert(0,'_')
+
     else: # Boring push-onto-queue.
         queue.insert(0,s)
 
