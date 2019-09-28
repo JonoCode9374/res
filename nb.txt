@@ -1,0 +1,22 @@
+>>> # queue
+...
+>>> queue = []
+>>> # push
+...
+>>> queue.insert(0,'hi')
+>>>
+>>> queue
+['hi']
+>>> queue.insert(0,'ha')
+>>> queue
+['ha', 'hi']
+>>> # pop
+...
+>>> queue.pop()
+'hi'
+>>> queue
+['ha']
+>>> queue.pop()
+'ha'
+>>> queue
+[]
