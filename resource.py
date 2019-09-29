@@ -30,9 +30,10 @@ for i in cod:
 i = 0 # The program cursor
 queue = [] # and the queue
 rs=0 # Should the next characters be keyboard-reversed?
+ret = [] # The previous states of the queue
 
 while i < len(code): # The iteration starts now.
-    
+
     s = code[i]
 
     if rs:
@@ -83,6 +84,9 @@ while i < len(code): # The iteration starts now.
         queue.insert(0,code[i+1])
         i+=1
 
+    elif s == '=': # Check equality between queue and previous state
+        queue=[chr(queue==ret[-1][::-1])]
+
     else: # Boring push-onto-queue.
         queue.insert(0,s)
 
@@ -91,13 +95,13 @@ while i < len(code): # The iteration starts now.
     # Example: Hello, world!
     # This simply pushes the string onto the queue.
 
+    ret.append(queue)
+
     i+=1
 
 # Just used for debugging, will be
 # indicated by a flag later:
-print(queue)
-
-queue=queue[::-1]
+print(queue,ret)
 
 # Implicit output
 for _ in range(len(queue)):
