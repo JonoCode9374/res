@@ -8,9 +8,9 @@ def lshf(c): # one-character keyboard left shift.
     res = '=`1234567890-\\\tqwertyuiop[]\'asdfghjkl;/zxcvbnm,.+~!@#$%^&*()_|QWERTYUIOP{}"ASDFGHJKL:?ZXCVBNM<> \n'
     return res[lut.index(c)]
 
-def krev(c): # One-character keyboard reversion.
-    lut = '~!@#$%^&*()_+\tQWERTYUIOP{}|ASDFGHJKL:"\nZXCVBNM<>? `1234567890-=qwertyuiop[]\\asdfghjkl;\'zxcvbnm,./'
-    res = '+_)(*&^%$#@!~|}{POIUYTREWQ\t\n":LKJHGFDSA ?><MNBVCXZ=-0987654321`\\][poiuytrewq\';lkjhgfdsa/.,mnbvcxz'
+def krev(c): # One-character keyboard reversion. Carefully re-considered to make sure that it works in a wide variety of challenges.
+    lut = '~!@#$%^&*()_+\tQWERTYUIOP{}|ASDFGHJKL:"\nZXCVBNM<>?` =123456789-0qwertyuiop[]\\asdfghjkl;\'zxcvbnm,./'
+    res = '+_)(*&^%$#@!~|}{POIUYTREWQ\t\n":LKJHGFDSA`?><MNBVCXZ-0987654321 \\=][poiuytrewq\';lkjhgfdsa/.,mnbvcxz'
     # TODO: Define a LUT that converts characters according
     # to my QWERTY keyboard of my laptop.
     return res[lut.index(c)]
@@ -105,8 +105,9 @@ print(queue,ret)
 
 # Implicit output
 for _ in range(len(queue)):
-    a=queue.pop() # If the last item on the queue
+    a=queue[0] # If the last item on the queue
     if ord(a) > 31 and ord(a) < 128 or ord(a)==10: # is printable:
         print(a,end="")# then print its charater code.
     else: # Otherwise,
         print(ord(a),end="") # print its ord code.
+    del queue[0]
