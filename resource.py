@@ -87,8 +87,14 @@ while i < len(code): # The iteration starts now.
     elif s == '=': # Check equality between queue and previous state
         queue=[chr(queue==ret[-1][::-1])]
 
+    elif s in '+-*/%^': # Operation of items *in* queue (rarely useful tho)
+        if s=='^':s='**'
+        exec("queue.insert(0,ord(queue.pop())"+s+"ord(queue.pop()))")
+        if queue[0]>-1:
+            queue[0]=chr(queue[0])
+
     else: # Boring push-onto-queue.
-        queue.insert(0,s)
+        queue.insert(0,code[i])
 
     # Usage: Just type it and it will be 
     # automatically on the queue!
@@ -106,8 +112,11 @@ print(queue,ret)
 # Implicit output
 for _ in range(len(queue)):
     a=queue[0] # If the last item on the queue
-    if ord(a) > 31 and ord(a) < 128 or ord(a)==10: # is printable:
-        print(a,end="")# then print its charater code.
-    else: # Otherwise,
-        print(ord(a),end="") # print its ord code.
+    try:
+        if ord(a) > 31 and ord(a) < 128 or ord(a)==10: # is printable:
+            print(a,end="")# then print its charater code.
+        else: # Otherwise,
+            print(ord(a),end="") # print its ord code.
+    except:
+        print(a,end="") # Otherwise it is a negative number, treated uniquely.
     del queue[0]
