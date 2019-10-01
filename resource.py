@@ -1,3 +1,5 @@
+import sys # Used for argument parsing
+
 # resource.py
 # Description: the main interpreter
 
@@ -14,8 +16,6 @@ def krev(c): # One-character keyboard reversion. Carefully re-considered to make
     # TODO: Define a LUT that converts characters according
     # to my QWERTY keyboard of my laptop.
     return res[lut.index(c)]
-
-import sys # Used for argument parsing
 
 try:
     file = open(sys.argv[1]) # Read a file
@@ -107,7 +107,7 @@ while i < len(code): # The iteration starts now.
 
 # Just used for debugging, will be
 # indicated by a flag later:
-print(queue,ret)
+print(queue,ret,file=sys.stderr) # Print to STDERR for debugging the code.
 
 # Implicit output
 for _ in range(len(queue)):
