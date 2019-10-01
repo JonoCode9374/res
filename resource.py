@@ -56,6 +56,10 @@ while i < len(code): # The iteration starts now.
     elif s == '<': # Rollback duplicate instruction.
         queue.insert(0,queue[-1])
     
+    elif s == '>': # Queue rollback instruction.
+        queue.insert(0,queue[-1])
+        del queue[-1]
+
     # Usage: This copies the frontmost 
     # item of the queue to the back of 
     # the queue.
@@ -84,6 +88,12 @@ while i < len(code): # The iteration starts now.
         queue.insert(0,code[i+1])
         i+=1
 
+    elif s == 'q': # Pushes 0 onto the queue, in order to prevent clipboard problems.
+        queue.insert(0,'\x00')
+
+    elif s == 'Q': # Pushes 256 onto the queue, in order to prevent clipboard problems.
+        queue.insert(0,'\xFF')    
+
     elif s == '=': # Check equality between queue and previous state
         queue=[chr(queue==ret[-1][::-1])]
 
@@ -93,6 +103,9 @@ while i < len(code): # The iteration starts now.
         if queue[0]>-1:
             queue[0]=chr(queue[0])
 
+    elif s in ':;' # Greater than / less than
+        pass
+    
     else: # Boring push-onto-queue.
         queue.insert(0,code[i])
 
