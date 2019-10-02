@@ -37,6 +37,7 @@ ret = [] # The previous states of the queue
 while i < len(code): # The iteration starts now.
 
     s = code[i]
+    #print("before:", s, queue)
 
     if rs:
         s=krev(s)
@@ -44,7 +45,7 @@ while i < len(code): # The iteration starts now.
     if s=='\\': # Escaping instruction.
         i+=1
         try:
-            queue.insert(0,s)
+            queue.insert(0,code[i])
         except:
             queue.insert(0,'\n')
 
@@ -65,7 +66,7 @@ while i < len(code): # The iteration starts now.
     # Usage: This copies the frontmost 
     # item of the queue to the back of 
     # the queue.
-    # Example: ab< does bab onto 
+    # Example: ab< does aba onto 
     # the queue.
     
     elif s == '~': # Reverse the whole queue.
@@ -88,11 +89,11 @@ while i < len(code): # The iteration starts now.
         if queue[0]>-1:
             queue[0]=chr(queue[0])
 
-    elif s in ':;' # Greater than / less than
+    elif s in ':;': # Greater than / less than
         pass
     
     else: # Boring push-onto-queue.
-        queue.insert(0,code[i])
+        queue.insert(0,s)
 
     # Usage: Just type it and it will be 
     # automatically on the queue!
@@ -102,6 +103,8 @@ while i < len(code): # The iteration starts now.
     ret.append(queue)
 
     i+=1
+    #print("after:", s, queue)
+
 
 # Just used for debugging, will be
 # indicated by a flag later:
