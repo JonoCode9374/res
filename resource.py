@@ -5,6 +5,8 @@ import sys # Used for argument parsing
 
 # Description: defines a function
 # that reverses the keys on the keyboard horizontally.
+
+# I don't see how this can be used; however, I am preserving this function for later potential uses.
 def lshf(c): # one-character keyboard left shift.
     lut = '`1234567890-=\tqwertyuiop[]\\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>? \n'
     res = '=`1234567890-\\\tqwertyuiop[]\'asdfghjkl;/zxcvbnm,.+~!@#$%^&*()_|QWERTYUIOP{}"ASDFGHJKL:?ZXCVBNM<> \n'
@@ -76,23 +78,6 @@ while i < len(code): # The iteration starts now.
         # Easy, just keyboard reversing. (4 aliases for this instruction.)
         # Of course a tab is also key reversing (if you are desparately wanting space)
         rs=not rs
-    
-    elif s == 'Z': # The least frequent English letter, left shift keyboard & push!
-        code[i+1]=lshf(code[i+1])
-        queue.insert(0,code[i+1])
-        i+=1
-    
-    elif s == 'z': # Left shifting twice is always useful!
-        code[i+1]=lshf(code[i+1])
-        code[i+1]=lshf(code[i+1])
-        queue.insert(0,code[i+1])
-        i+=1
-
-    elif s == 'q': # Pushes 0 onto the queue, in order to prevent clipboard problems.
-        queue.insert(0,'\x00')
-
-    elif s == 'Q': # Pushes 256 onto the queue, in order to prevent clipboard problems.
-        queue.insert(0,'\xFF')    
 
     elif s == '=': # Check equality between queue and previous state
         queue=[chr(queue==ret[-1][::-1])]
